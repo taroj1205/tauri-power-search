@@ -10,6 +10,7 @@ import { Results, SearchInput } from "../components/search";
 import { getExtensions } from "../utils/extensions";
 import { getInstalledApps } from "../utils/apps";
 import type { SearchResult } from "../utils/search";
+import { invoke } from "@tauri-apps/api/core";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,8 @@ function Index() {
     (count: number) => onChangeTotalResultsRef.current(count),
     []
   );
+
+  invoke('refresh_apps')
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -32,6 +32,7 @@ export const SearchInput: FC<SearchInputProps> = memo(
     const activeIndexRef = useRef<number>(0);
     const [totalResults, setTotalResults] = useState(defaultLength);
     const queryClient = useQueryClient();
+    
     const { data: query } = useQuery({
       queryKey: ["currentQuery"],
       initialData: "",
