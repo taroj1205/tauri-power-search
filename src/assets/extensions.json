@@ -1,0 +1,8 @@
+[
+	{
+		"id": "extract-text",
+		"name": "Extract Text",
+		"description": "Extract text from file",
+		"component": "ExtractTextExtension"
+	}
+]

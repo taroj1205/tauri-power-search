@@ -1,0 +1,1 @@
+export const DEFAULT_DISPLAY_COUNT = 20;
