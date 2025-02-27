@@ -2,9 +2,10 @@ use base64::{engine::general_purpose::STANDARD, Engine as _};
 use log;
 use pdf_extract;
 use serde::{Deserialize, Serialize};
+use std::fs::File;
 use std::io::Write;
+use std::path::PathBuf;
 use tauri::{command, Emitter, Window};
-use tempfile::NamedTempFile;
 use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -79,24 +80,25 @@ pub fn extract_pdf_text(
         0.4,
         "Preparing for text extraction",
     );
-    let mut temp_file =
-        NamedTempFile::new().map_err(|e| format!("Failed to create temporary file: {}", e))?;
+    // Create a temporary file path
+    let temp_path: PathBuf = std::env::temp_dir().join(format!("pdf_{}.pdf", id));
 
-    // Write PDF data to temporary file
+    // Create and write to temporary file
+    let mut temp_file =
+        File::create(&temp_path).map_err(|e| format!("Failed to create temporary file: {}", e))?;
+
     temp_file
         .write_all(&pdf_data)
         .map_err(|e| format!("Failed to write PDF data: {}", e))?;
 
-    // Extract text by pages using the temporary file path
-    emit_progress(
-        &window,
-        &id,
-        "Extracting text",
-        0.6,
-        "Extracting text from PDF",
-    );
-    let pages_text = pdf_extract::extract_text_by_pages(temp_file.path())
+    // Extract text using the temporary file path
+    let pages_text = pdf_extract::extract_text_by_pages(&temp_path)
         .map_err(|e| format!("Failed to extract PDF text: {}", e))?;
+
+    // Clean up the temporary file
+    if let Err(e) = std::fs::remove_file(&temp_path) {
+        log::warn!("Failed to remove temporary file: {}", e);
+    }
 
     let total_pages = pages_text.len() as u32;
 

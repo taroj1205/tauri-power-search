@@ -1,12 +1,11 @@
 use base64::{engine::general_purpose::STANDARD, Engine};
-use image::load_from_memory;
 use std::env::temp_dir;
+use std::fs::File;
 use tokio::task;
 use win_ocr::ocr;
 
 #[tauri::command]
 pub async fn extract_text_from_base64(base64_str: String, id: String) -> Result<String, String> {
-    // Spawn a new asynchronous task to perform the OCR extraction
     let handle = task::spawn_blocking(move || {
         // Decode the base64 string to bytes
         let image_data = match STANDARD.decode(base64_str) {
@@ -14,22 +13,16 @@ pub async fn extract_text_from_base64(base64_str: String, id: String) -> Result<
             Err(e) => return Err(e.to_string()),
         };
 
-        // Load the image from the decoded bytes
-        let img = match load_from_memory(&image_data) {
-            Ok(image) => image,
-            Err(e) => return Err(e.to_string()),
-        };
-
-        // Save the image to a temporary file with unique ID
+        // Save directly to a temporary file
         let temp_path = temp_dir().join(format!("temp_image_{}.png", id));
-        if let Err(e) = img.save(&temp_path) {
-            return Err(e.to_string());
-        }
+        let file = File::create(&temp_path).map_err(|e| e.to_string())?;
+        // Write the decoded data directly to file
+        std::io::Write::write_all(&mut std::io::BufWriter::new(file), &image_data)
+            .map_err(|e| e.to_string())?;
 
         // Perform OCR on the image
         let ocr_text = match ocr(temp_path.to_str().unwrap()) {
             Ok(text) => {
-                // Clean up the temp file after OCR
                 if let Err(e) = std::fs::remove_file(&temp_path) {
                     eprintln!("Failed to remove temp file: {}", e);
                 }
@@ -38,10 +31,8 @@ pub async fn extract_text_from_base64(base64_str: String, id: String) -> Result<
             Err(e) => return Err(e.to_string()),
         };
 
-        // Return the extracted text
         Ok(ocr_text)
     });
 
-    // Await the result from the OCR task
     handle.await.map_err(|e| e.to_string())?
 }

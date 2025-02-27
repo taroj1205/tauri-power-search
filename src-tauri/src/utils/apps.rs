@@ -92,6 +92,14 @@ pub fn get_cached_apps() -> Vec<InstalledApp> {
 }
 
 #[tauri::command]
+pub fn refresh_apps() -> Vec<InstalledApp> {
+    if let Ok(mut installed_apps) = INSTALLED_APPS.lock() {
+        *installed_apps = get_installed_apps();
+    }
+    get_cached_apps()
+}
+
+#[tauri::command]
 pub fn open_app(app_path: String) -> Result<(), String> {
     let mut command = Command::new("rundll32.exe");
     command.arg("shell32.dll,ShellExec_RunDLL");
