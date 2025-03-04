@@ -1,9 +1,9 @@
-import { memo, useCallback, useRef } from "react"
 import { FileTextIcon } from "@yamada-ui/lucide"
 import { Button, FileInput, IconButton, Motion } from "@yamada-ui/react"
+import { memo, useCallback, useRef } from "react"
 import { Route as ExtensionsRoute } from "../../../routes/extensions.$id"
-import type { PdfSearchData } from "../types"
 import { usePdfProcessing } from "../hooks/use-pdf-processing"
+import type { PdfSearchData } from "../types"
 
 export const PdfUploadButton = memo(() => {
   const fileInputRef = useRef<HTMLInputElement>(null)

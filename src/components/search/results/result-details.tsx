@@ -1,33 +1,30 @@
 import {
+  BlocksIcon,
+  CalculatorIcon,
+  CopyIcon,
+  FileIcon,
+  LinkIcon,
+} from "@yamada-ui/lucide";
+import {
   Center,
   Highlight,
-  memo,
   NativeTable,
   TableContainer,
   Tbody,
   Td,
-  Th,
-  Thead,
   Tr,
+  memo,
 } from "@yamada-ui/react";
 import {
-  VStack,
-  HStack,
-  Text,
   Badge,
-  Separator,
+  HStack,
   ScrollArea,
+  Separator,
+  Text,
+  VStack,
 } from "@yamada-ui/react";
-import {
-  AppWindowIcon,
-  BlocksIcon,
-  CalculatorIcon,
-  LinkIcon,
-  FileIcon,
-  CopyIcon,
-} from "@yamada-ui/lucide";
-import type { SearchResult } from "../../../utils/search";
 import { useClipboard } from "@yamada-ui/react";
+import type { SearchResult } from "../../../utils/search";
 
 export interface ResultDetailsProps {
   result?: SearchResult;

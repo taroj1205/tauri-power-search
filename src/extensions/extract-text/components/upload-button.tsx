@@ -1,8 +1,8 @@
-import { memo, useCallback, useRef } from "react"
 import { UploadIcon } from "@yamada-ui/lucide"
 import { Button, IconButton, Motion } from "@yamada-ui/react"
-import { useFileProcessing } from "../hooks/use-file-processing"
+import { memo, useCallback, useRef } from "react"
 import { Route as ExtensionsRoute } from "../../../routes/extensions.$id"
+import { useFileProcessing } from "../hooks/use-file-processing"
 
 export const UploadButton = memo(() => {
   const fileInputRef = useRef<HTMLInputElement>(null)

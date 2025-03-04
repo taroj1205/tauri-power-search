@@ -1,7 +1,7 @@
+import { Center, VStack } from "@yamada-ui/react"
 import { memo } from "react"
-import { VStack, Center } from "@yamada-ui/react"
-import { UploadButton } from "./components/upload-button"
 import { ResultsGrid } from "./components/results-grid"
+import { UploadButton } from "./components/upload-button"
 
 export const ExtractTextExtension = memo(() => {
   return (

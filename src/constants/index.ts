@@ -1,1 +1,1 @@
-export { DEFAULT_DISPLAY_COUNT } from "./search";
+export { DEFAULT_DISPLAY_COUNT } from "./search"

@@ -1,15 +1,15 @@
-import { useCallback } from "react";
-import { Route as ExtensionsRoute } from "../../../routes/extensions.$id";
-import type { PdfResult } from "../../pdf-tools/types";
+import { useCallback } from "react"
+import { Route as ExtensionsRoute } from "../../../routes/extensions.$id"
+import type { PdfResult } from "../../pdf-tools/types"
 
 export const useTextChange = () => {
-  const navigate = ExtensionsRoute.useNavigate();
+  const navigate = ExtensionsRoute.useNavigate()
 
   const handleTextChange = useCallback(
     (index: number, newText: string) => {
       navigate({
         search: (prev) => {
-          const results = Array.isArray(prev.results) ? [...prev.results] : [];
+          const results = Array.isArray(prev.results) ? [...prev.results] : []
 
           results[index] = results[index]
             ? {
@@ -40,14 +40,14 @@ export const useTextChange = () => {
                 processingStage: "Complete",
                 processingProgress: 1,
                 processingMessage: "Text manually edited",
-              } as PdfResult);
+              } as PdfResult)
 
-          return { results };
+          return { results }
         },
-      });
+      })
     },
-    [navigate]
-  );
+    [navigate],
+  )
 
-  return { handleTextChange };
-};
+  return { handleTextChange }
+}

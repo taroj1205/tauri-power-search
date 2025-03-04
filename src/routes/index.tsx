@@ -1,16 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
+  // useQuery,
 } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+// import { invoke } from "@tauri-apps/api/core"
 import { VStack } from "@yamada-ui/react";
 import { useCallback, useRef } from "react";
 import { Results, SearchInput } from "../components/search";
+// import { getInstalledApps } from "../utils/apps"
 import { getExtensions } from "../utils/extensions";
-import { getInstalledApps } from "../utils/apps";
 import type { SearchResult } from "../utils/search";
-import { invoke } from "@tauri-apps/api/core";
 
 const queryClient = new QueryClient();
 

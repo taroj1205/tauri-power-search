@@ -1,4 +1,5 @@
 import { Link as TanStackLink } from "@tanstack/react-router";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import {
   AppWindowIcon,
   BlocksIcon,
@@ -14,8 +15,6 @@ import {
   useClipboard,
 } from "@yamada-ui/react";
 import type { SearchResult } from "../../../utils/search";
-import { invoke } from "@tauri-apps/api/core";
-import { getCurrentWindow } from "@tauri-apps/api/window";
 
 export interface ResultCardProps {
   result: SearchResult;

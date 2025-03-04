@@ -1,16 +1,16 @@
-import { invoke } from "@tauri-apps/api/core";
+// import { invoke } from "@tauri-apps/api/core"
 import { isNumber } from "@yamada-ui/react";
 import Fuse from "fuse.js";
+// import { DEFAULT_DISPLAY_COUNT } from "../constants";
 import { getExtensions } from "./extensions";
 import type { ExtensionMetadata } from "./extensions";
 import { calculate } from "./string";
-import { DEFAULT_DISPLAY_COUNT } from "../constants";
 
-interface InstalledApp {
-  name: string;
-  path: string | null;
-  type: "app";
-}
+// interface InstalledApp {
+//   name: string
+//   path: string | null
+//   type: "app"
+// }
 
 type CalculatorResult = {
   type: "calculator";
@@ -22,9 +22,9 @@ type LinkResult = {
   value: string;
 };
 
-type InstalledAppResult = InstalledApp & {
-  type: "app";
-};
+// type InstalledAppResult = InstalledApp & {
+//   type: "app"
+// }
 
 type ExtensionResult = ExtensionMetadata & {
   type: "extension";
@@ -68,7 +68,7 @@ export const initializeAppCache = async () => {
 
 export const search = async (
   query?: string,
-  displayCount = DEFAULT_DISPLAY_COUNT,
+  // displayCount = DEFAULT_DISPLAY_COUNT,
   onResults?: SearchCallback
 ) => {
   const resultsArray: SearchResult[] = [];

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { getExtension } from "../utils/extensions"
 import { ErrorComponent, PendingComponent } from "../components/extensions"
-import type { PdfResult } from "../extensions/pdf-tools/types"
 import { ExtensionRouteComponent } from "../components/extensions/route"
+import type { PdfResult } from "../extensions/pdf-tools/types"
+import { getExtension } from "../utils/extensions"
 
 interface RouteSearchData {
   results: PdfResult[]

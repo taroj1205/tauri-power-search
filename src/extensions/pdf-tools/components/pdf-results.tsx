@@ -1,29 +1,29 @@
-// import { Route as ExtensionsRoute } from "../../../routes/extensions.$id"
-import type { PdfPage } from "../types"
-import { useCallback, useRef, memo, useState } from "react"
 import { listen } from "@tauri-apps/api/event"
+// import { useQueryClient } from "@tanstack/react-query"
+import { CopyIcon } from "@yamada-ui/lucide"
 import {
-  Card,
-  CardBody,
-  CardHeader,
-  Heading,
-  Progress,
-  Text,
-  useNotice,
-  VStack,
-  HStack,
-  Badge,
-  IconButton,
-  Tooltip,
-  ScrollArea,
   Accordion,
   AccordionItem,
   AccordionLabel,
   AccordionPanel,
+  Badge,
+  Card,
+  CardBody,
+  CardHeader,
+  HStack,
+  Heading,
+  IconButton,
+  Progress,
+  ScrollArea,
   Spacer,
+  Text,
+  Tooltip,
+  VStack,
+  useNotice,
 } from "@yamada-ui/react"
-// import { useQueryClient } from "@tanstack/react-query"
-import { CopyIcon } from "@yamada-ui/lucide"
+import { memo, useCallback, useRef, useState } from "react"
+// import { Route as ExtensionsRoute } from "../../../routes/extensions.$id"
+import type { PdfPage } from "../types"
 
 interface PageExtractedEvent {
   id: string
