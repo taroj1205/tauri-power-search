@@ -1,15 +1,15 @@
-import { memo } from "react"
 import {
   For,
-  Text,
-  VStack,
   Grid,
   Image,
   ScrollArea,
   SkeletonText,
+  Text,
+  VStack,
 } from "@yamada-ui/react"
-import { useTextChange } from "../hooks/use-text-change"
+import { memo } from "react"
 import { Route as ExtensionsRoute } from "../../../routes/extensions.$id"
+import { useTextChange } from "../hooks/use-text-change"
 import type { ExtractedData } from "../types"
 
 interface ExtractTextSearchData {

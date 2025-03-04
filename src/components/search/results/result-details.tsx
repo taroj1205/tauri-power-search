@@ -1,33 +1,30 @@
 import {
+  BlocksIcon,
+  CalculatorIcon,
+  CopyIcon,
+  FileIcon,
+  LinkIcon,
+} from "@yamada-ui/lucide";
+import {
   Center,
   Highlight,
-  memo,
   NativeTable,
   TableContainer,
   Tbody,
   Td,
-  Th,
-  Thead,
   Tr,
+  memo,
 } from "@yamada-ui/react";
 import {
-  VStack,
-  HStack,
-  Text,
   Badge,
-  Separator,
+  HStack,
   ScrollArea,
+  Separator,
+  Text,
+  VStack,
 } from "@yamada-ui/react";
-import {
-  AppWindowIcon,
-  BlocksIcon,
-  CalculatorIcon,
-  LinkIcon,
-  FileIcon,
-  CopyIcon,
-} from "@yamada-ui/lucide";
-import type { SearchResult } from "../../../utils/search";
 import { useClipboard } from "@yamada-ui/react";
+import type { SearchResult } from "../../../utils/search";
 
 export interface ResultDetailsProps {
   result?: SearchResult;
@@ -68,8 +65,8 @@ export const ResultDetails = memo(({ result, query }: ResultDetailsProps) => {
         return <CalculatorIcon {...iconProps} />;
       case "link":
         return <LinkIcon {...iconProps} />;
-      case "app":
-        return <AppWindowIcon {...iconProps} />;
+      // case "app":
+      //   return <AppWindowIcon {...iconProps} />;
       default:
         return <FileIcon {...iconProps} />;
     }
@@ -83,8 +80,8 @@ export const ResultDetails = memo(({ result, query }: ResultDetailsProps) => {
         return "Calculation";
       case "link":
         return "Web Link";
-      case "app":
-        return "Application";
+      // case "app":
+      //   return "Application";
       default:
         return "File";
     }
@@ -103,8 +100,9 @@ export const ResultDetails = memo(({ result, query }: ResultDetailsProps) => {
         <HStack>
           {renderIcon()}
           <Text fontSize="xl" fontWeight="bold" lineClamp={1}>
-            {result.type === "extension" || result.type === "app"
-              ? result.name
+            {result.type === "extension"
+              ? //  || result.type === "app"
+                result.name
               : result.value}
           </Text>
         </HStack>
@@ -131,8 +129,9 @@ export const ResultDetails = memo(({ result, query }: ResultDetailsProps) => {
             borderRadius="md"
             h="full"
           >
-            {result.type === "extension" || result.type === "app"
-              ? result.name
+            {result.type === "extension"
+              ? //  || result.type === "app"
+                result.name
               : result.value}
           </Highlight>
         </ScrollArea>
@@ -140,23 +139,16 @@ export const ResultDetails = memo(({ result, query }: ResultDetailsProps) => {
         {/* Metadata */}
         <ScrollArea as={TableContainer}>
           <NativeTable withColumnBorders>
-            <Thead>
-              <Tr>
-                <Th>{getContentType()}</Th>
-                <Th>Metadata</Th>
-              </Tr>
-            </Thead>
-
             <Tbody>
               {result.type && (
                 <Tr>
-                  <Td>Type</Td>
+                  <Td w="20">Type</Td>
                   <Td>{result.type}</Td>
                 </Tr>
               )}
               {result.type === "link" && (
                 <Tr>
-                  <Td>URL</Td>
+                  <Td w="20">URL</Td>
                   <Td>
                     <HStack>
                       <Text>{result.value}</Text>
@@ -172,7 +164,7 @@ export const ResultDetails = memo(({ result, query }: ResultDetailsProps) => {
 
               {result.type === "calculator" && (
                 <Tr>
-                  <Td>Calculation</Td>
+                  <Td w="20">Calculation</Td>
                   <Td>
                     <HStack>
                       <Text>{result.value}</Text>
@@ -186,7 +178,7 @@ export const ResultDetails = memo(({ result, query }: ResultDetailsProps) => {
                 </Tr>
               )}
 
-              {result.type === "app" && (
+              {/* {result.type === "app" && (
                 <>
                   {result.name && (
                     <Tr>
@@ -201,12 +193,12 @@ export const ResultDetails = memo(({ result, query }: ResultDetailsProps) => {
                     </Tr>
                   )}
                 </>
-              )}
+              )} */}
 
               {result.type === "extension" && (
                 <>
                   <Tr>
-                    <Td>ID</Td>
+                    <Td w="20">ID</Td>
                     <Td>{result.id}</Td>
                   </Tr>
                   {result.description && (

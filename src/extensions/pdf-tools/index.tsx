@@ -1,7 +1,7 @@
+import { Center, VStack } from "@yamada-ui/react"
 import { memo } from "react"
-import { VStack, Center } from "@yamada-ui/react"
-import { PdfUploadButton } from "./components/pdf-upload-button"
 import { PdfResults } from "./components/pdf-results"
+import { PdfUploadButton } from "./components/pdf-upload-button"
 
 export const PdfToolsExtension = memo(() => {
   return (

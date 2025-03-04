@@ -11,10 +11,10 @@ import {
 } from "@yamada-ui/react";
 import type { MutableRefObject } from "react";
 import { useEffect, useRef, useState } from "react";
+import { DEFAULT_DISPLAY_COUNT } from "../../../constants";
 import { type SearchResult, search } from "../../../utils/search";
 import { ResultCard } from "./result-card";
 import { ResultDetails } from "./result-details";
-import { DEFAULT_DISPLAY_COUNT } from "../../../constants";
 
 interface ResultProps {
   onChangeQueryRef: MutableRefObject<(query: string | null) => void>;
@@ -50,7 +50,7 @@ export const Results: FC<StackProps & ResultProps> = memo(
       isLoading,
     } = useQuery({
       queryKey: ["search", query],
-      queryFn: () => search(query, displayCount),
+      queryFn: () => search(query),
       staleTime: 0,
     });
 
