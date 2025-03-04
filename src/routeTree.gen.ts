@@ -10,39 +10,39 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root"
-import { Route as ExtensionsIdImport } from "./routes/extensions.$id"
-import { Route as IndexImport } from "./routes/index"
+import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
+import { Route as ExtensionsIdImport } from './routes/extensions.$id'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
 const ExtensionsIdRoute = ExtensionsIdImport.update({
-  id: "/extensions/$id",
-  path: "/extensions/$id",
+  id: '/extensions/$id',
+  path: '/extensions/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    "/extensions/$id": {
-      id: "/extensions/$id"
-      path: "/extensions/$id"
-      fullPath: "/extensions/$id"
+    '/extensions/$id': {
+      id: '/extensions/$id'
+      path: '/extensions/$id'
+      fullPath: '/extensions/$id'
       preLoaderRoute: typeof ExtensionsIdImport
       parentRoute: typeof rootRoute
     }
@@ -52,27 +52,27 @@ declare module "@tanstack/react-router" {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute
-  "/extensions/$id": typeof ExtensionsIdRoute
+  '/': typeof IndexRoute
+  '/extensions/$id': typeof ExtensionsIdRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute
-  "/extensions/$id": typeof ExtensionsIdRoute
+  '/': typeof IndexRoute
+  '/extensions/$id': typeof ExtensionsIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  "/": typeof IndexRoute
-  "/extensions/$id": typeof ExtensionsIdRoute
+  '/': typeof IndexRoute
+  '/extensions/$id': typeof ExtensionsIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/extensions/$id"
+  fullPaths: '/' | '/extensions/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/extensions/$id"
-  id: "__root__" | "/" | "/extensions/$id"
+  to: '/' | '/extensions/$id'
+  id: '__root__' | '/' | '/extensions/$id'
   fileRoutesById: FileRoutesById
 }
 
