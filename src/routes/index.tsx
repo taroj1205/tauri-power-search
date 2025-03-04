@@ -27,19 +27,19 @@ function Index() {
     id: extension.id,
   }));
 
-  const { data: installedApps = [] } = useQuery({
-    queryKey: ["installedApps"],
-    queryFn: getInstalledApps,
-    staleTime: 0,
-    refetchOnMount: true,
-  });
+  // const { data: installedApps = [] } = useQuery({
+  //   queryKey: ["installedApps"],
+  //   queryFn: getInstalledApps,
+  //   staleTime: 0,
+  //   refetchOnMount: true,
+  // });
 
   const combinedResults = [
     ...extensionResults,
-    ...installedApps.map((app) => ({
-      ...app,
-      type: "app" as const,
-    })),
+    // ...installedApps.map((app) => ({
+    //   ...app,
+    //   type: "app" as const,
+    // })),
   ] as SearchResult[];
 
   const onChangeQueryRef = useRef<(query: string | null) => void>(() => void 0);
@@ -61,7 +61,7 @@ function Index() {
     []
   );
 
-  invoke('refresh_apps')
+  // invoke('refresh_apps')
 
   return (
     <QueryClientProvider client={queryClient}>

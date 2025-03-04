@@ -34,7 +34,7 @@ type ExtensionResult = ExtensionMetadata & {
 export type SearchResult =
   | CalculatorResult
   | LinkResult
-  | InstalledAppResult
+  // | InstalledAppResult
   | ExtensionResult;
 
 export type SearchCallback = (results: SearchResult[]) => void;
@@ -98,23 +98,23 @@ export const search = async (
     // just ignore
   }
 
-  // installed apps using backend search
-  if (query.length > 0) {
-    try {
-      const matchingApps = await invoke<InstalledApp[]>("search_apps", {
-        query,
-        limit: displayCount,
-      });
-      console.log(matchingApps);
-      if (matchingApps.length > 0) {
-        resultsArray.push(
-          ...matchingApps.map((app) => ({ ...app, type: "app" as const }))
-        );
-      }
-    } catch (error) {
-      console.error("Failed to search apps:", error);
-    }
-  }
+  // // installed apps using backend search
+  // if (query.length > 0) {
+  //   try {
+  //     const matchingApps = await invoke<InstalledApp[]>("search_apps", {
+  //       query,
+  //       limit: displayCount,
+  //     });
+  //     console.log(matchingApps);
+  //     if (matchingApps.length > 0) {
+  //       resultsArray.push(
+  //         ...matchingApps.map((app) => ({ ...app, type: "app" as const }))
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to search apps:", error);
+  //   }
+  // }
 
   if (onResults) {
     onResults(resultsArray);

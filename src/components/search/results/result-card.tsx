@@ -27,16 +27,18 @@ export interface ResultCardProps {
 export const ResultCard = memo(
   ({ result, active, index, query }: ResultCardProps) => {
     const isExtensionResult = result.type === "extension";
-    const isInstalledApp = result.type === "app";
+    // const isInstalledApp = result.type === "app";
     const isLinkResult = result.type === "link";
     const isCalculatorResult = result.type === "calculator";
 
-    const text =
-      isExtensionResult || isInstalledApp ? result.name : result.value;
+    const text = isExtensionResult
+      ? //  || isInstalledApp
+        result.name
+      : result.value;
 
     const isFilePath =
       !isLinkResult &&
-      !isInstalledApp &&
+      // !isInstalledApp &&
       !isExtensionResult &&
       (text.includes("/") || text.includes("\\"));
 
@@ -47,12 +49,13 @@ export const ResultCard = memo(
         // Copy to clipboard
         onCopy(result.value);
         getCurrentWindow().hide();
-      } else if (result.type === "app") {
-        // Open the app using Rust
-        console.log(result.path);
-        invoke("open_app", { appPath: result.path });
-        getCurrentWindow().hide();
       }
+      // else if (result.type === "app") {
+      //   // Open the app using Rust
+      //   console.log(result.path);
+      //   invoke("open_app", { appPath: result.path });
+      //   getCurrentWindow().hide();
+      // }
     };
 
     return (
@@ -62,8 +65,6 @@ export const ResultCard = memo(
         bg="transparent"
         _active={{ bg: "whiteAlpha.100" }}
         _hover={{ bg: "whiteAlpha.200" }}
-        transitionProperty="background"
-        transitionDuration="fast"
         data-active={active ? "true" : undefined}
       >
         <TanStackLink
