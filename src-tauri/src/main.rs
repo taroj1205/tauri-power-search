@@ -6,9 +6,9 @@ mod utils;
 use api::image::extract_text_from_base64;
 use api::pdf::extract_pdf_text;
 use api::window::center_window_on_current_monitor;
-use utils::apps::{
-    get_cached_apps, initialize_apps_in_background, open_app, refresh_apps, search_apps,
-};
+// use utils::apps::{
+//     get_cached_apps, initialize_apps_in_background, open_app, refresh_apps, search_apps,
+// };
 
 use tauri::{
     menu::{Menu, MenuItem},
@@ -43,7 +43,7 @@ fn message(message: String) {
 }
 
 fn main() {
-    initialize_apps_in_background();
+    // initialize_apps_in_background();
 
     let mut builder = tauri::Builder::default().plugin(tauri_plugin_fs::init());
     #[cfg(desktop)]
@@ -165,12 +165,12 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             message,
-            get_apps,
+            // get_apps,
             extract_text_from_base64,
             extract_pdf_text,
-            open_app,
-            search_apps,
-            refresh_apps
+            // open_app,
+            // search_apps,
+            // refresh_apps
         ])
         .on_window_event(|_app, _event| {
             // Placeholder for window event handling
