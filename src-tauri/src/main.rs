@@ -20,10 +20,10 @@ use window_vibrancy::apply_acrylic;
 #[cfg(target_os = "macos")]
 use window_vibrancy::{apply_vibrancy, clear_vibrancy, NSVisualEffectMaterial};
 
-#[tauri::command]
-fn get_apps() -> Vec<utils::apps::InstalledApp> {
-    get_cached_apps()
-}
+// #[tauri::command]
+// fn get_apps() -> Vec<utils::apps::InstalledApp> {
+//     get_cached_apps()
+// }
 
 fn toggle_app_window(app: &AppHandle) {
     if let Some(window) = app.get_webview_window("popup") {
