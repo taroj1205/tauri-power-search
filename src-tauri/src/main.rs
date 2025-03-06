@@ -45,7 +45,8 @@ fn message(message: String) {
 fn main() {
     // initialize_apps_in_background();
 
-    let mut builder = tauri::Builder::default().plugin(tauri_plugin_fs::init());
+    let mut builder = tauri::Builder::default();
+    // .plugin(tauri_plugin_fs::init());
     #[cfg(desktop)]
     {
         builder = builder.plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
@@ -56,8 +57,8 @@ fn main() {
         }));
     }
     builder
-        .plugin(tauri_plugin_shell::init())
-        .plugin(tauri_plugin_clipboard::init())
+        // .plugin(tauri_plugin_shell::init())
+        // .plugin(tauri_plugin_clipboard::init())
         .setup(|app| {
             #[cfg(desktop)]
             {
