@@ -5,6 +5,12 @@ import Fuse from "fuse.js";
 import { getExtensions } from "./extensions";
 import type { ExtensionMetadata } from "./extensions";
 import { calculate } from "./string";
+import {
+  isUnitConversion,
+  parseUnitConversion,
+  convertUnit,
+  formatConversionResult,
+} from "./unit-conversion";
 
 // interface InstalledApp {
 //   name: string
@@ -15,6 +21,12 @@ import { calculate } from "./string";
 type CalculatorResult = {
   type: "calculator";
   value: string;
+};
+
+type UnitConversionResult = {
+  type: "unit-conversion";
+  value: string;
+  originalQuery: string;
 };
 
 type LinkResult = {
@@ -33,6 +45,7 @@ type ExtensionResult = ExtensionMetadata & {
 
 export type SearchResult =
   | CalculatorResult
+  | UnitConversionResult
   | LinkResult
   // | InstalledAppResult
   | ExtensionResult;
@@ -86,6 +99,25 @@ export const search = async (
       .map((result) => result.item);
     if (matchingExtensions.length > 0) {
       resultsArray.push(...matchingExtensions);
+    }
+  }
+
+  // unit conversion
+  if (isUnitConversion(query)) {
+    const conversion = parseUnitConversion(query);
+    if (conversion) {
+      const result = convertUnit(
+        conversion.value,
+        conversion.fromUnit,
+        conversion.toUnit
+      );
+      if (result) {
+        resultsArray.push({
+          type: "unit-conversion",
+          value: formatConversionResult(result),
+          originalQuery: query,
+        });
+      }
     }
   }
 

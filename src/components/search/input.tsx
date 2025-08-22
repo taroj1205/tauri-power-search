@@ -105,7 +105,7 @@ export const SearchInput: FC<SearchInputProps> = memo(
             onChange={handleChange}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-            placeholder="Search or type an equation..."
+            placeholder="Search, calculate, or convert units (e.g., 12px to rem)..."
             autoFocus
             {...props}
           />
