@@ -10,6 +10,7 @@ import {
   parseUnitConversion,
   convertUnit,
   formatConversionResult,
+  formatConversionResultForCopy,
 } from "./unit-conversion";
 
 // interface InstalledApp {
@@ -26,6 +27,7 @@ type CalculatorResult = {
 type UnitConversionResult = {
   type: "unit-conversion";
   value: string;
+  copyValue: string;
   originalQuery: string;
 };
 
@@ -115,6 +117,7 @@ export const search = async (
         resultsArray.push({
           type: "unit-conversion",
           value: formatConversionResult(result),
+          copyValue: formatConversionResultForCopy(result),
           originalQuery: query,
         });
       }

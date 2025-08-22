@@ -48,7 +48,8 @@ export const ResultCard = memo(
     const handleResultClick = (result: SearchResult) => {
       if (result.type === "link" || result.type === "calculator" || result.type === "unit-conversion") {
         // Copy to clipboard
-        onCopy(result.value);
+        const valueToCopy = result.type === "unit-conversion" ? result.copyValue : result.value;
+        onCopy(valueToCopy);
         getCurrentWindow().hide();
       }
       // else if (result.type === "app") {
