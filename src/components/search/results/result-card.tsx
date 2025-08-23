@@ -5,6 +5,7 @@ import {
   BlocksIcon,
   CalculatorIcon,
   LinkIcon,
+  RulerIcon,
 } from "@yamada-ui/lucide";
 import {
   Card,
@@ -29,6 +30,7 @@ export const ResultCard = memo(
     // const isInstalledApp = result.type === "app";
     const isLinkResult = result.type === "link";
     const isCalculatorResult = result.type === "calculator";
+    const isUnitConversionResult = result.type === "unit-conversion";
 
     const text = isExtensionResult
       ? //  || isInstalledApp
@@ -44,9 +46,10 @@ export const ResultCard = memo(
     const { onCopy } = useClipboard();
 
     const handleResultClick = (result: SearchResult) => {
-      if (result.type === "link" || result.type === "calculator") {
+      if (result.type === "link" || result.type === "calculator" || result.type === "unit-conversion") {
         // Copy to clipboard
-        onCopy(result.value);
+        const valueToCopy = result.type === "unit-conversion" ? result.copyValue : result.value;
+        onCopy(valueToCopy);
         getCurrentWindow().hide();
       }
       // else if (result.type === "app") {
@@ -92,6 +95,8 @@ export const ResultCard = memo(
               <BlocksIcon />
             ) : isCalculatorResult ? (
               <CalculatorIcon />
+            ) : isUnitConversionResult ? (
+              <RulerIcon />
             ) : isLinkResult ? (
               <LinkIcon />
             ) : (
