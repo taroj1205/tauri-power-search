@@ -50,3 +50,5 @@ lto = true
 codegen-units = 1
 strip = true
 
+[build]
+rustflags = [ "-C", "link-arg=-fuse-ld=lld" ]
